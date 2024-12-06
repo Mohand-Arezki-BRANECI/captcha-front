@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {AppCaptchaComponent} from "./Components/app-captcha/app-captcha.component";
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'app-captcha', component: AppCaptchaComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,0 +1,27 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 50px); /* Alternate between cells and symbols */
+  grid-auto-rows: 50px; /* Fixed height for rows */
+  gap: 5px; /* Optional for spacing */
+  position: relative;
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.symbol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  background: white;
+  position: relative;
+  z-index: 10;
+}
