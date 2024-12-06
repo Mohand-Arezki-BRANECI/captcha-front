@@ -1,27 +1,133 @@
-.grid {
-  display: grid;
-  grid-template-columns: repeat(5, 50px); /* Alternate between cells and symbols */
-  grid-auto-rows: 50px; /* Fixed height for rows */
-  gap: 5px; /* Optional for spacing */
-  position: relative;
+/* Styling for the title */
+h3 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4a90e2;
+  text-align: center;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
+/* Styling for the rules paragraph */
+p {
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.game-container {
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Title styling */
+.game-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Rules styling */
+.game-rules {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Grid container */
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Grid styling */
+.grid {
+  display: grid;
+  gap: 5px;
+}
+
+/* Row styling */
+.row {
+  display: flex;
+}
+
+/* Cell styling */
 .cell {
   width: 50px;
   height: 50px;
-  border: 1px solid #ccc;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 18px;
+  color: #fff;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.symbol {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 20px;
-  height: 20px;
-  background: white;
-  position: relative;
-  z-index: 10;
+/* Cell hover effect */
+.cell:hover {
+  background-color: #ddd;
+  transform: scale(1.1);
+}
+
+/* Sun cells */
+.cell.sun {
+  background-color: #fdd835;
+  color: #333;
+}
+
+/* Moon cells */
+.cell.moon {
+  background-color: #90caf9;
+  color: #333;
+}
+
+/* Submit button */
+.submit-container {
+  margin-top: 20px;
+}
+
+.submit-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Message container */
+.message-container {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Success message */
+.message-container.success {
+  color: #2e7d32;
+  background-color: #e8f5e9;
+}
+
+/* Error message */
+.message-container.error {
+  color: #d32f2f;
+  background-color: #ffebee;
 }
