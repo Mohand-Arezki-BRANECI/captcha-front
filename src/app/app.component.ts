@@ -8,13 +8,4 @@ import {CaptchaService} from "./Services/captcha.service";
 })
 export class AppComponent {
   title = 'captcha-frontend';
-
-  constructor(private captchaService: CaptchaService) {
-  }
-
-  ngOnInit() {
-    this.captchaService.generateCaptcha().subscribe((data: any) => {
-      console.log(data)
-    });
-  }
 }

@@ -1,13 +1,21 @@
-<p>app-captcha works!</p>
-<div class="grid">
-  <div class="row" *ngFor="let row of grid; let i = index">
-    <div
-      class="cell"
-      *ngFor="let cell of row; let j = index"
-      (click)="toggleCell(i, j)">
-      <span>{{ cell }}</span>
-      <span *ngIf="rules[i][j]" class="rule">{{ rules[i][j] }}</span>
+<h3>Play this game to prove that are not a bot :)</h3>
+<p>Rules : No more than two suns or moons can be adjacent in any row or column.
+  Each row and column must have an equal number of suns and moons.</p>
+
+<div class="grid-container">
+  <div class="grid">
+    <div class="row" *ngFor="let row of grid; let i = index">
+      <div class="cell" *ngFor="let cell of row; let j = index" (click)="toggleCell(i, j)">
+        <span>{{ cell }}</span>
+      </div>
     </div>
+  </div>
+  <!-- Submit button -->
+  <div class="submit-container">
+    <button class="submit-btn" (click)="submitGrid()">Submit</button>
+  </div>
+  <div class="message-container" [ngClass]="{ success: success, error: !success }">
+    <p>{{ message }}</p>
   </div>
 </div>
 

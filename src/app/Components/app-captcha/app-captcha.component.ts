@@ -7,25 +7,18 @@ import {CaptchaService} from "../../Services/captcha.service";
   styleUrls: ['./app-captcha.component.scss'],
 })
 export class AppCaptchaComponent {
+
+  message: string = '';
+  success: boolean = false;
   constructor(private captchaService: CaptchaService) {
   }
 
-  ngOnInit() {
-    this.captchaService.generateCaptcha().subscribe((data: any) => {
-      console.log(data)
-    });
-  }
-
   grid: string[][] = [
-    ['', '', ''],
-    ['', '', ''],
-    ['', '', '']
-  ];
+    ['', '', '', ''],
+    ['', '', '', ''],
+    ['', '', '', ''],
+    ['', '', '', ''],
 
-  rules: string[][] = [
-    ['', '=', ''],
-    ['x', '', ''],
-    ['', '=', '']
   ];
 
   toggleCell(i: number, j: number) {
@@ -38,46 +31,45 @@ export class AppCaptchaComponent {
     }
   }
 
-  isValidGrid(): boolean {
-    // Validation logic for no more than 2 adjacent suns or moons
-    for (let i = 0; i < this.grid.length; i++) {
-      for (let j = 0; j < this.grid[i].length; j++) {
-        if (!this.validateCell(i, j)) {
-          return false;
+  // Convert grid to a list of 0's (Moon) and 1's (Sun)
+  convertGridToList(): number[] {
+    const gridList: number[] = [];
+    for (let row of this.grid) {
+      for (let cell of row) {
+        if (cell === '☀️') {
+          gridList.push(1); // Sun is 1
+        } else if (cell === '🌙') {
+          gridList.push(0); // Moon is 0
+        } else {
+          gridList.push(-1); // Empty cell, could handle as needed (like `-1` or `null`)
         }
       }
     }
-    return true;
+    return gridList;
   }
 
-  validateCell(i: number, j: number): boolean {
-    // Check adjacency rules
-    const adjacent = [
-      [i - 1, j], [i + 1, j], [i, j - 1], [i, j + 1]
-    ];
-    let sunCount = 0, moonCount = 0;
-
-    adjacent.forEach(([x, y]) => {
-      if (this.grid[x]?.[y] === '☀️') sunCount++;
-      if (this.grid[x]?.[y] === '🌙') moonCount++;
-    });
-
-    if (sunCount > 2 || moonCount > 2) return false;
-
-    // Check rules
-    const rule = this.rules[i][j];
-    if (rule === 'x' && this.grid[i][j] === this.grid[i][j + 1]) return false;
-    if (rule === '=' && this.grid[i][j] !== this.grid[i][j + 1]) return false;
-
-    return true;
-  }
-
+  // Submit grid to backend
   submitGrid() {
-    if (this.isValidGrid()) {
-      console.log('CAPTCHA Passed!');
-    } else {
-      console.log('Invalid Configuration');
-    }
+    console.log('Button clicked!');
+    const gridList = this.convertGridToList();
+    console.log('Grid as List:', gridList);
+
+
+    // Call captcha service to send the grid data to the backend
+    this.captchaService.submitGridData(gridList).subscribe(
+      (response) => {
+        console.log('Grid submitted successfully:', response);
+        this.success = response.success;
+        this.message = response.message;
+      },
+      (error) => {
+        this.success = false;
+        this.message = 'An error occurred while submitting the grid.';
+        console.error(error);
+      }
+    );
   }
+
+
 }
 
